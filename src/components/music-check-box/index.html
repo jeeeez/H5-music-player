@@ -1,0 +1,5 @@
+<div class="music-check-box" @click="toggle">
+	<span class="iconfont icon-stop" v-if="value"></span>
+	<span class="iconfont icon-play" v-if="!value"></span>
+	<slot></slot>
+</div>

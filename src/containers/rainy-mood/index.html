@@ -1,0 +1,6 @@
+<div class="rainy-mood">
+
+	<div class="music-player">
+		<music-box v-for="(resource, index) in resources" :key="resource.name" :resource="resource" :class="'music-box-' + index"></music-box>
+	</div>
+</div>

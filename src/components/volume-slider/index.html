@@ -1,0 +1,11 @@
+<div class="slider-box" ref="slider">
+	<div class="slider-bar" :style="{width:currentPosition}"></div>
+	<div class="slider-control"
+		:class="{hover: hovering, dragging: dragging}"
+		:style="{left:currentPosition}"
+		@mouseenter="onMouseEnter"
+		@mouseleave="onMouseLeave"
+		@mousedown="onButtonDown">
+		<div class="slider-button"></div>
+	</div>
+</div>

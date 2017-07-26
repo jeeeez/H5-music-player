@@ -1,0 +1,9 @@
+<div class="music-box">
+	<div class="music-controls">
+		<music-check-box v-model="playing">Rain</music-check-box>
+		<div class="volume-contrl">
+			<volume-slider class="pull-right" :value="volume" @change="onVolumeChange" />
+		</div>
+	</div>
+	<audio ref="audio" :src="resource.URL" preload loop />
+</div>
