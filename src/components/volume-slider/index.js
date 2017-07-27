@@ -27,7 +27,6 @@ const VolumeSlider = {
 	template,
 	data() {
 		return {
-			currentValue: this.value,
 			startPosition: 0,
 			startX: 0,
 			newPosition: null,
@@ -40,7 +39,7 @@ const VolumeSlider = {
 			return parseInt(getElementWidth(this.$refs.slider), 10);
 		},
 		currentPosition() {
-			return `${ (this.currentValue - this.min) / (this.max - this.min) * 100 }%`
+			return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`
 		}
 	},
 	methods: {
@@ -103,18 +102,11 @@ const VolumeSlider = {
 			let value = movedSteps * widthPerStep * (this.max - this.min) * 0.01 + this.min;
 			value = parseFloat(value.toFixed(0));
 
-			this.currentValue = value;
+			this.$emit('input', value);
 
-			if (!this.dragging && this.currentValue !== this.oldValue) {
-				this.oldValue = this.currentValue;
-				this.$emit('change', this.currentValue);
+			if (!this.dragging && value !== this.oldValue) {
+				this.oldValue = value;
 			}
-		}
-	},
-	watch: {
-		value(volume) {
-			if (this.dragging) return;
-			this.currentValue = volume;
 		}
 	}
 };

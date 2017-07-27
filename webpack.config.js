@@ -44,14 +44,14 @@ module.exports = {
 	],
 	module: {
 		rules: [{
-		// 	test: /\.js$/,
-		// 	loader: 'eslint-loader',
-		// 	enforce: 'pre',
-		// 	include: [path.resolve('src')],
-		// 	options: {
-		// 		formatter: require('eslint-friendly-formatter')
-		// 	}
-		// }, {
+			// 	test: /\.js$/,
+			// 	loader: 'eslint-loader',
+			// 	enforce: 'pre',
+			// 	include: [path.resolve('src')],
+			// 	options: {
+			// 		formatter: require('eslint-friendly-formatter')
+			// 	}
+			// }, {
 			test: /\.js$/,
 			use: ['babel-loader'],
 			include: [path.resolve('./src')]
@@ -61,7 +61,7 @@ module.exports = {
 			include: [path.resolve('./src')]
 		}, {
 			test: /\.(s)css$/,
-			use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+			use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
 		}, {
 			test: /\.(png|svg|jpg|gif)$/,
 			use: ['file-loader']
@@ -69,7 +69,7 @@ module.exports = {
 			test: /\.(woff|woff2|eot|ttf|otf)$/,
 			use: ['file-loader']
 		}, {
-			test: /\.(m4a)$/,
+			test: /\.(m4a|caf)$/,
 			use: ['file-loader']
 		}]
 	}

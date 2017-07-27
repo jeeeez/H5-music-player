@@ -25,33 +25,28 @@ const MusicBox = {
 
 	data() {
 		return {
-			volume: 50,
 			playing: false
 		};
 	},
 
 	mounted() {
-		this.audio.volume = this.volume / 100;
-		// this.playing = true;
+		this.audio.volume = this.resource.volume / 100;
 	},
 
 	computed: {
 		audio() {
 			return this.$refs.audio;
+		},
+		volume(){
+			return this.resource.volume;
 		}
 	},
 
-	methods: {
-		onVolumeChange(volume) {
-			this.volume = volume;
-			this.audio.volume = this.volume / 100;
-		},
-
-		// play() {
-		// 	this.audio.play();
-		// }
-	},
+	methods: {},
 	watch: {
+		volume(v){
+			this.audio.volume = v / 100;
+		},
 		playing(val) {
 			if (val) {
 				this.audio.play();
