@@ -37,14 +37,14 @@ const MusicBox = {
 		audio() {
 			return this.$refs.audio;
 		},
-		volume(){
+		volume() {
 			return this.resource.volume;
 		}
 	},
 
 	methods: {},
 	watch: {
-		volume(v){
+		volume(v) {
 			this.audio.volume = v / 100;
 		},
 		playing(val) {

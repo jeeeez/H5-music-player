@@ -1,11 +1,22 @@
 <div class="slider-box" ref="slider">
 	<div class="slider-bar" :style="{width:currentPosition}"></div>
-	<div class="slider-control"
+	<!-- PC -->
+	<div v-if="!isMobile"
+		class="slider-control"
 		:class="{hover: hovering, dragging: dragging}"
 		:style="{left:currentPosition}"
 		@mouseenter="onMouseEnter"
 		@mouseleave="onMouseLeave"
-		@mousedown="onButtonDown">
+		@mousedown="onMouseDown">
+		<div class="slider-button"></div>
+	</div>
+
+	<!-- Mobile -->
+	<div v-if="isMobile"
+		class="slider-control"
+		:class="{hover: hovering, dragging: dragging}"
+		:style="{left:currentPosition}"
+		@touchstart="onTouchStart">
 		<div class="slider-button"></div>
 	</div>
 </div>

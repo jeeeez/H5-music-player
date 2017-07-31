@@ -1,6 +1,7 @@
 .music-check-box{
 	display: inline-block;
 	cursor: pointer;
+	color: #fff;
 
 	&.disabled{
 		cursor: not-allowed;

@@ -3,6 +3,10 @@ import './index.scss';
 import Vue from 'vue';
 import template from './index.html';
 
+import {
+	isMobile
+} from '@/utils/browser';
+
 
 const VolumeSlider = {
 	name: 'volume-slider',
@@ -27,6 +31,7 @@ const VolumeSlider = {
 	template,
 	data() {
 		return {
+			isMobile,
 			startPosition: 0,
 			startX: 0,
 			newPosition: null,
@@ -46,13 +51,16 @@ const VolumeSlider = {
 		onMouseEnter() {
 			this.hovering = true;
 		},
+
 		onMouseLeave() {
 			this.hovering = false;
 		},
-		onButtonDown(event) {
+
+		onMouseDown(event) {
 			event.preventDefault();
 
 			this.onDragStart(event);
+
 			window.addEventListener('mousemove', this.onDragging);
 			window.addEventListener('mouseup', this.onDragEnd);
 			window.addEventListener('contextmenu', this.onDragEnd);
@@ -88,6 +96,37 @@ const VolumeSlider = {
 			window.removeEventListener('contextmenu', this.onDragEnd);
 		},
 
+		onTouchStart(event) {
+			event.preventDefault();
+			this.dragging = true;
+			this.startX = event.touches[0].clientX;
+			this.startPosition = parseFloat(this.currentPosition);
+
+			window.addEventListener('touchmove', this.onTouchMoving);
+			window.addEventListener('touchend', this.onTouchEnd);
+		},
+
+		onTouchMoving(event) {
+			if(!this.dragging) return;
+			const diff = (event.touches[0].clientX - this.startX) / this.sliderSize * 100;
+			this.newPosition = diff + this.startPosition;
+
+			this.setPosition(this.newPosition);
+		},
+
+		onTouchEnd() {
+			if (!this.dragging) return;
+
+			setTimeout(() => {
+				this.dragging = false;
+				this.setPosition(this.newPosition);
+			}, 0);
+
+			window.removeEventListener('touchmove', this.onTouchMoving);
+			window.removeEventListener('touchend', this.onTouchEnd);
+		},
+
+
 		setPosition(newPosition) {
 			if (newPosition < 0) {
 				newPosition = 0;
@@ -95,7 +134,6 @@ const VolumeSlider = {
 				newPosition = 100;
 			}
 
-			// 每步所占的百分比
 			const widthPerStep = 100 / ((this.max - this.min) / this.step);
 			const movedSteps = Math.round(newPosition / widthPerStep);
 
